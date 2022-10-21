@@ -51,8 +51,12 @@ export class ListagemImovelComponent implements OnInit {
     this.ImovelService.atualizarVenda(ImovelAVender, "vendido").subscribe(
       vendido => {
         console.log(vendido);
-        const indxImovel = this.Imovel.findIndex(u => u.status === ImovelAVender.status);
+        const indxImovel = this.Imovel.findIndex(u => u.id === ImovelAVender.id);
 
+        //  const indxImovel = this.Imovel.findIndex(u => u.id === ImovelARemover.id);
+        //  const indxImovel = this.Imovel.findIndex(u => u.status === ImovelAVender.status);
+
+        
         if (indxImovel > -1){
           this.ImovelAVenda.splice(indxImovel, 1);
           this.ImovelVendidos.push(vendido);
