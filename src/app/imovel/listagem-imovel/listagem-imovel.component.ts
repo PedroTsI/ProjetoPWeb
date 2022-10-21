@@ -12,25 +12,25 @@ import {ImovelService} from '../../shared/servicos/imovel.service';
 export class ListagemImovelComponent implements OnInit {
 
   Imovel: Imovel[];
-  ImovelVendidos: Imovel[];
+  ImoveisVendidos: Imovel[];
   ImovelAVenda: Imovel[];
 
 
   constructor(private roteador: Router, private ImovelService: ImovelService) {
     this.Imovel = new Array<Imovel>();
-    this.ImovelVendidos = new Array<Imovel>();
+    this.ImoveisVendidos = new Array<Imovel>();
     this.ImovelAVenda = new Array<Imovel>();
   }
 
   ngOnInit(): void {
     this.ImovelService.listar().subscribe(
-      ImovelRetornados => this.Imovel = ImovelRetornados
+      ImoveisRetornados => this.Imovel = ImoveisRetornados
     );
     this.ImovelService.listar().subscribe(
-      ImovelRetornados => this.ImovelVendidos = ImovelRetornados.filter(Imovel => Imovel.status == "vendido")
+      ImoveisRetornados => this.ImoveisVendidos = ImoveisRetornados.filter(Imovel => Imovel.status == "vendido")
     );
     this.ImovelService.listar().subscribe(
-      ImovelRetornados => this.ImovelAVenda = ImovelRetornados.filter(Imovel => Imovel.status == "a venda")
+      ImoveisRetornados => this.ImovelAVenda = ImoveisRetornados.filter(Imovel => Imovel.status == "a venda")
     );
   }
 
@@ -59,7 +59,7 @@ export class ListagemImovelComponent implements OnInit {
         
         if (indxImovel > -1){
           this.ImovelAVenda.splice(indxImovel, 1);
-          this.ImovelVendidos.push(vendido);
+          this.ImoveisVendidos.push(vendido);
         }
       }
     );
