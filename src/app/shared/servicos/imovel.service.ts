@@ -35,7 +35,7 @@ export class ImovelService {
       .put<Imovel>(`${this.URL_IMOVEIS}/${Imovel.id}`, Imovel);
   }
   atualizarVenda(Imovel: Imovel, status: string): Observable<Imovel>{
-    return this.clienteHttp.patch<Imovel>(`${this.URL_IMOVEIS}/${Imovel.id}`, {status})
+    return this.clienteHttp.patch<Imovel>(`${this.URL_IMOVEIS}/${Imovel.id}`, {status});
   }
 
 
