@@ -1,0 +1,64 @@
+<h1>Listagem</h1>
+
+<p>
+  <mat-icon [matBadge]="imovelAVenda.length" matBadgeColor="primary">home</mat-icon>
+</p>
+
+<div fxLayout="row wrap" fxLayout.lt-md="column">
+  <mat-card fxFlex="15" *ngFor="let imovel of imovelAVenda" class="card-imovel">
+    <mat-card-header class="card-image">
+      <mat-icon></mat-icon>
+      <mat-card-title>
+        <div style="display: block;" fxLayout="row wrap" fxLayoutAlign="start center">
+        <img fxFlex="100" [src]="imovel.imagem"alt="">
+        </div>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      {{imovel.endereco}} <br>
+      Preco: {{imovel.valor}}
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-icon-button (click)="removerImovel(imovel)">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button mat-icon-button [routerLink]="['/editaimovel', imovel.id]">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="atualizarVenda(imovel)">
+        <mat-icon>money</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<div>
+  <p>
+    <mat-icon [matBadge]="imoveisVendidos.length" matBadgeColor="primary">apartment</mat-icon>
+  </p>
+  <h1>Listagem de Imoveis Vendidos</h1>
+  <div fxLayout="row wrap" fxLayout.lt-md="column">
+    <mat-card fxFlex="15" *ngFor="let imovel of imoveisVendidos" class="card-imovel">
+      <mat-card-header class="card-image">
+        <mat-icon></mat-icon>
+        <mat-card-title>
+          <div style="display: block;" fxLayout="row wrap" fxLayoutAlign="start center">
+            <img fxFlex="100" [src]="imovel.imagem"alt="">
+          </div>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        {{imovel.endereco}} <br>
+        Preco: {{imovel.valor}}
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-icon-button (click)="removerImovel(imovel)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button [routerLink]="['/editaimovel', imovel.id]">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

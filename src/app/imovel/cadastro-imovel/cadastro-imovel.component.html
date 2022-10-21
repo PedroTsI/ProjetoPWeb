@@ -1,0 +1,35 @@
+<h1>Cadastro do Imóvel</h1>
+
+
+<mat-card class="card-cadastro">
+  <mat-card-content>
+    <mat-form-field>
+      <mat-label>Endereço</mat-label>
+      <input matInput [(ngModel)]="imovelAtual.endereco" placeholder="Endereço do Imóvel">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Número</mat-label>
+      <input matInput [(ngModel)]="imovelAtual.numero">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Telefone</mat-label>
+      <input matInput [(ngModel)]="imovelAtual.telefone"><br>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Preco</mat-label>
+      <input matInput [(ngModel)]="imovelAtual.valor"><br>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Link da Imagem Imóvel</mat-label>
+      <input matInput [(ngModel)]="imovelAtual.imagem"><br>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Status do Imovel</mat-label>
+      <input matInput [(ngModel)]="imovelAtual.status"><br>
+    </mat-form-field>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button class="botao" mat-raised-button (click)="inserirOuAtualizarImovel()">{{nomeBotao}}</button>
+  </mat-card-actions>
+</mat-card>
