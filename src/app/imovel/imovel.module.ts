@@ -14,6 +14,7 @@ import {FlexModule} from '@angular/flex-layout';
 import { CadastroListagemComponent } from './cadastro-listagem/cadastro-listagem.component';
 import {RouterModule} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
+import {PipesModule} from "../shared/pipes/pipes.module";
 
 
 
@@ -35,7 +36,8 @@ import {HttpClientModule} from '@angular/common/http';
     MatInputModule,
     FlexModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    PipesModule
   ],
   exports: [
     CadastroImovelComponent,

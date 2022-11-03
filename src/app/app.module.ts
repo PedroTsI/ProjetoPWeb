@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {FormsModule} from '@angular/forms';
@@ -12,6 +11,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {ListagemImovelComponent} from './imovel/listagem-imovel/listagem-imovel.component';
 import {ImovelModule} from './imovel/imovel.module';
 import {LayoutModule} from './layout/layout.module';
+import {PipesModule} from "./shared/pipes/pipes.module";
 
 @NgModule({
   declarations: [
@@ -26,7 +26,8 @@ import {LayoutModule} from './layout/layout.module';
     MatIconModule,
     MatBadgeModule,
     ImovelModule,
-    LayoutModule
+    LayoutModule,
+    PipesModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -16,7 +16,8 @@
     </mat-card-header>
     <mat-card-content>
       {{imovel.endereco}} <br>
-      Preco: {{imovel.valor}}
+      Preco: {{imovel.valor}}<br>
+      Numero de Telefone: {{imovel.telefone | number}}
     </mat-card-content>
     <mat-card-actions>
       <button mat-icon-button (click)="removerImovel(imovel)">
@@ -49,7 +50,8 @@
       </mat-card-header>
       <mat-card-content>
         {{imovel.endereco}} <br>
-        Preco: {{imovel.valor}}
+        Preco: {{imovel.valor}}<br>
+        Numero de Telefone: {{imovel.telefone | number}}
       </mat-card-content>
       <mat-card-actions>
         <button mat-icon-button (click)="removerImovel(imovel)">
