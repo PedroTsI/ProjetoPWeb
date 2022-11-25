@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'number'
 })
 export class NumberPipe implements PipeTransform {
-  transform(valor: string): string {
+  transform(valor: string | undefined): string | undefined {
     if (valor && valor.length === 11) {
       return `(${valor.substr(0, 2)})${valor.substr(2, 5)}-${valor.substr(7, 4)}`;
     }

@@ -3,6 +3,7 @@ import {IMOVEIS} from '../../shared/modelo/IMOVEIS';
 import {Imovel} from '../../shared/modelo/imovel';
 import {Router} from '@angular/router';
 import {ImovelService} from '../../shared/servicos/imovel.service';
+import {ImovelFirestoreService} from "../../shared/servicos/imovel-firestore.service";
 
 @Component({
   selector: 'app-listagem-imovel',
@@ -16,7 +17,7 @@ export class ListagemImovelComponent implements OnInit {
   ImovelAVenda: Imovel[];
 
 
-  constructor(private roteador: Router, private ImovelService: ImovelService) {
+  constructor(private roteador: Router, private ImovelService: ImovelFirestoreService) {
     this.Imovel = new Array<Imovel>();
     this.ImovelVendidos = new Array<Imovel>();
     this.ImovelAVenda = new Array<Imovel>();
@@ -24,38 +25,40 @@ export class ListagemImovelComponent implements OnInit {
 
   ngOnInit(): void {
     this.ImovelService.listar().subscribe(
-      ImovelRetornados => this.Imovel = ImovelRetornados
+      (ImovelRetornados: Array<Imovel>) => this.Imovel = ImovelRetornados
     );
     this.ImovelService.listar().subscribe(
-      ImovelRetornados => this.ImovelVendidos = ImovelRetornados.filter(Imovel => Imovel.status == "vendido")
+      (ImovelRetornados: Array<Imovel>) => this.ImovelVendidos = ImovelRetornados.filter(Imovel => Imovel.status == "vendido")
     );
     this.ImovelService.listar().subscribe(
-      ImovelRetornados => this.ImovelAVenda = ImovelRetornados.filter(Imovel => Imovel.status == "a venda")
+      (ImovelRetornados: Array<Imovel>) => this.ImovelAVenda = ImovelRetornados.filter(Imovel => Imovel.status == "a venda")
     );
   }
 
-  removerImovel(ImovelARemover: Imovel): void {
-    this.ImovelService.apagar(ImovelARemover.id).subscribe(
-      removido => {
-        console.log(removido);
-        const indxImovel = this.Imovel.findIndex(u => u.id === ImovelARemover.id);
+  removerImovel(id: string | undefined): void {
+    if (id)
+      this.ImovelService.remover(id).subscribe(
+        (removido: void) => {
+          console.log(removido);
+          const indxImovel = this.Imovel.findIndex(u => u.id === id);
 
-        if (indxImovel > -1) {
-          this.Imovel.splice(indxImovel, 1);
+          if (indxImovel > -1) {
+            this.Imovel.splice(indxImovel, 1);
+          }
+
         }
-
-      }
-    );
+      );
   }
   atualizarVenda(ImovelAVender: Imovel): void {
-    this.ImovelService.atualizarVenda(ImovelAVender, "vendido").subscribe(
+    ImovelAVender.status = 'vendido';
+    this.ImovelService.atualizar(ImovelAVender).subscribe(
       vendido => {
         console.log(vendido);
-        const indxImovel = this.Imovel.findIndex(u => u.status === ImovelAVender.status);
+        const indxImovel = this.Imovel.findIndex(u => u.id === ImovelAVender.id);
 
         if (indxImovel > -1){
-          this.ImovelAVenda.splice(indxImovel, 1, vendido);
-          this.ImovelVendidos.push(vendido);
+          this.ImovelAVenda.splice(indxImovel, 1);
+          this.ImovelVendidos.push(ImovelAVender);
         }
       }
     );

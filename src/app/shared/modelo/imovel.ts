@@ -1,20 +1,20 @@
 export class Imovel {
-  id: string;
-  endereco: string;
-  numero: number;
-  telefone: string;
-  valor: number;
-  imagem: string;
-  status: string;
+  id?: string;
+  endereco?: string;
+  numero?: number;
+  telefone?: string;
+  valor?: number;
+  imagem?: string;
+  status?: string;
 
-  constructor(id: string, endereco: string, numero: number, telefone: string, valor: number, imagem: string, status: string) {
+  constructor(id?: string, imovel : Imovel={}) {
     this.id = id;
-    this.endereco = endereco;
-    this.numero = numero;
-    this.telefone = telefone;
-    this.valor = valor;
-    this.imagem = imagem;
-    this.status = status;
+    this.endereco = imovel.endereco;
+    this.numero = imovel.numero;
+    this.telefone = imovel.telefone;
+    this.valor = imovel.valor;
+    this.imagem = imovel.imagem;
+    this.status = imovel.status;
   }
 
 }

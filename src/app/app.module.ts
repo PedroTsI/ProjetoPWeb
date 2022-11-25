@@ -12,6 +12,7 @@ import {ListagemImovelComponent} from './imovel/listagem-imovel/listagem-imovel.
 import {ImovelModule} from './imovel/imovel.module';
 import {LayoutModule} from './layout/layout.module';
 import {PipesModule} from "./shared/pipes/pipes.module";
+import { FirestoreModule } from './firestore/firestore.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {PipesModule} from "./shared/pipes/pipes.module";
     ImovelModule,
     LayoutModule,
     PipesModule,
+    FirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

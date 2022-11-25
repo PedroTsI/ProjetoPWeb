@@ -20,7 +20,7 @@
       Numero de Telefone: {{imovel.telefone | number}}
     </mat-card-content>
     <mat-card-actions>
-      <button mat-icon-button (click)="removerImovel(imovel)">
+      <button mat-icon-button (click)="removerImovel(imovel.id)">
         <mat-icon>delete</mat-icon>
       </button>
       <button mat-icon-button [routerLink]="['/editaimovel', imovel.id]">
@@ -54,7 +54,7 @@
         Numero de Telefone: {{imovel.telefone | number}}
       </mat-card-content>
       <mat-card-actions>
-        <button mat-icon-button (click)="removerImovel(imovel)">
+        <button mat-icon-button (click)="removerImovel(imovel.id)">
           <mat-icon>delete</mat-icon>
         </button>
         <button mat-icon-button [routerLink]="['/editaimovel', imovel.id]">
