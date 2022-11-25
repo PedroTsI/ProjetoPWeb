@@ -3,6 +3,7 @@ import {IMOVEIS} from '../../shared/modelo/IMOVEIS';
 import {Imovel} from '../../shared/modelo/imovel';
 import {ActivatedRoute} from '@angular/router';
 import {ImovelService} from '../../shared/servicos/imovel.service';
+import {ImovelFirestoreService} from "../../shared/servicos/imovel-firestore.service";
 
 @Component({
   selector: 'app-cadastro-imovel',
@@ -16,8 +17,8 @@ export class CadastroImovelComponent implements OnInit {
   inserindo = true;
   nomeBotao = 'Inserir';
 
-  constructor(private rotaAtual: ActivatedRoute, private ImovelService: ImovelService) {
-    this.ImovelAtual = new Imovel('', '', 0, '', 0, '', '');
+  constructor(private rotaAtual: ActivatedRoute, private ImovelService: ImovelFirestoreService) {
+    this.ImovelAtual = new Imovel();
     if (rotaAtual.snapshot.paramMap.has('id')) {
       const idParaEdicao = rotaAtual.snapshot.paramMap.get('id');
       if (idParaEdicao) {
