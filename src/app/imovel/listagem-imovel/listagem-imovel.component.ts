@@ -17,7 +17,7 @@ export class ListagemImovelComponent implements OnInit {
   ImovelAVenda: Imovel[];
 
 
-  constructor(private roteador: Router, private ImovelService: ImovelFirestoreService) {
+  constructor(private roteador: Router, private ImovelService: ImovelService) {
     this.Imovel = new Array<Imovel>();
     this.ImovelVendidos = new Array<Imovel>();
     this.ImovelAVenda = new Array<Imovel>();
@@ -37,8 +37,8 @@ export class ListagemImovelComponent implements OnInit {
 
   removerImovel(id: string | undefined): void {
     if (id)
-      this.ImovelService.remover(id).subscribe(
-        (removido: void) => {
+      this.ImovelService.apagar(id).subscribe(
+        (removido: object) => {
           console.log(removido);
           const indxImovel = this.Imovel.findIndex(u => u.id === id);
 

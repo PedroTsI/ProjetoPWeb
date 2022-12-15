@@ -17,7 +17,7 @@ export class CadastroImovelComponent implements OnInit {
   inserindo = true;
   nomeBotao = 'Inserir';
 
-  constructor(private rotaAtual: ActivatedRoute, private ImovelService: ImovelFirestoreService) {
+  constructor(private rotaAtual: ActivatedRoute, private ImovelService: ImovelService) {
     this.ImovelAtual = new Imovel();
     if (rotaAtual.snapshot.paramMap.has('id')) {
       const idParaEdicao = rotaAtual.snapshot.paramMap.get('id');

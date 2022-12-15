@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 })
 export class ImovelService {
 
-  URL_IMOVEIS = 'http://localhost:3000/IMOVEIS';
+  URL_IMOVEIS = 'http://localhost:8080/api/imovel';
 
   constructor(private clienteHttp: HttpClient) { }
 
