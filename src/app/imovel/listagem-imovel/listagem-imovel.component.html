@@ -1,11 +1,12 @@
+<div class="componente">
 <h1>Listagem</h1>
 
 <p>
-  <mat-icon [matBadge]="ImovelAVenda.length" matBadgeColor="primary">home</mat-icon>
+  <mat-icon [matBadge]="imovelAVenda.length" matBadgeColor="primary">home</mat-icon>
 </p>
 
 <div fxLayout="row wrap" fxLayout.lt-md="column">
-  <mat-card fxFlex="15" *ngFor="let imovel of ImovelAVenda" class="card-imovel">
+  <mat-card fxFlex="15" *ngFor="let imovel of imovelAVenda" class="card-imovel">
     <mat-card-header class="card-image">
       <mat-icon></mat-icon>
       <mat-card-title>
@@ -20,7 +21,7 @@
       Numero de Telefone: {{imovel.telefone | number}}
     </mat-card-content>
     <mat-card-actions>
-      <button mat-icon-button (click)="removerImovel(imovel.id)">
+      <button mat-icon-button (click)="removerImovelAVenda(imovel)">
         <mat-icon>delete</mat-icon>
       </button>
       <button mat-icon-button [routerLink]="['/editaimovel', imovel.id]">
@@ -35,11 +36,11 @@
 
 <div>
   <p>
-    <mat-icon [matBadge]="ImovelVendidos.length" matBadgeColor="primary">apartment</mat-icon>
+    <mat-icon [matBadge]="imovelVendidos.length" matBadgeColor="primary">apartment</mat-icon>
   </p>
   <h1>Listagem de Imoveis Vendidos</h1>
   <div fxLayout="row wrap" fxLayout.lt-md="column">
-    <mat-card fxFlex="15" *ngFor="let imovel of ImovelVendidos" class="card-imovel">
+    <mat-card fxFlex="15" *ngFor="let imovel of imovelVendidos" class="card-imovel">
       <mat-card-header class="card-image">
         <mat-icon></mat-icon>
         <mat-card-title>
@@ -54,7 +55,7 @@
         Numero de Telefone: {{imovel.telefone | number}}
       </mat-card-content>
       <mat-card-actions>
-        <button mat-icon-button (click)="removerImovel(imovel.id)">
+        <button mat-icon-button (click)="removerImovelVendido(imovel)">
           <mat-icon>delete</mat-icon>
         </button>
         <button mat-icon-button [routerLink]="['/editaimovel', imovel.id]">
@@ -63,4 +64,5 @@
       </mat-card-actions>
     </mat-card>
   </div>
+</div>
 </div>

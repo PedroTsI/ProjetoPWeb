@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {ListagemImovelComponent} from './imovel/listagem-imovel/listagem-imovel.component';
 import {CadastroImovelComponent} from './imovel/cadastro-imovel/cadastro-imovel.component';
 import {CadastroListagemComponent} from './imovel/cadastro-listagem/cadastro-listagem.component';
+import {LoginComponent} from './layout/login/login.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: "cadastrolistaimoveis",
     component: CadastroListagemComponent
+  },
+  {
+    path: "",
+    component: LoginComponent
   }
 
 ];

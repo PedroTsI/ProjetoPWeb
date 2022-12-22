@@ -12,53 +12,63 @@ import {ImovelFirestoreService} from "../../shared/servicos/imovel-firestore.ser
 })
 export class ListagemImovelComponent implements OnInit {
 
-  Imovel: Imovel[];
-  ImovelVendidos: Imovel[];
-  ImovelAVenda: Imovel[];
+  imovel: Imovel[];
+  imovelVendidos: Imovel[];
+  imovelAVenda: Imovel[];
 
 
   constructor(private roteador: Router, private ImovelService: ImovelService) {
-    this.Imovel = new Array<Imovel>();
-    this.ImovelVendidos = new Array<Imovel>();
-    this.ImovelAVenda = new Array<Imovel>();
+    this.imovel = new Array<Imovel>();
+    this.imovelVendidos = new Array<Imovel>();
+    this.imovelAVenda = new Array<Imovel>();
   }
 
   ngOnInit(): void {
     this.ImovelService.listar().subscribe(
-      (ImovelRetornados: Array<Imovel>) => this.Imovel = ImovelRetornados
+      (ImovelRetornados: Array<Imovel>) => this.imovelVendidos = ImovelRetornados.filter(Imovel => Imovel.status == "vendido")
     );
     this.ImovelService.listar().subscribe(
-      (ImovelRetornados: Array<Imovel>) => this.ImovelVendidos = ImovelRetornados.filter(Imovel => Imovel.status == "vendido")
-    );
-    this.ImovelService.listar().subscribe(
-      (ImovelRetornados: Array<Imovel>) => this.ImovelAVenda = ImovelRetornados.filter(Imovel => Imovel.status == "a venda")
+      (ImovelRetornados: Array<Imovel>) => this.imovelAVenda = ImovelRetornados.filter(Imovel => Imovel.status == "a venda")
     );
   }
 
-  removerImovel(id: string | undefined): void {
-    if (id)
-      this.ImovelService.apagar(id).subscribe(
-        (removido: object) => {
+  removerImovelAVenda(imovelARemover: Imovel): void {
+    if (imovelARemover.id){
+      this.ImovelService.apagar(imovelARemover.id).subscribe(
+        removido => {
           console.log(removido);
-          const indxImovel = this.Imovel.findIndex(u => u.id === id);
+          const indxImovel = this.imovelAVenda.findIndex(u => u.id === imovelARemover.id);
 
           if (indxImovel > -1) {
-            this.Imovel.splice(indxImovel, 1);
+            this.imovelAVenda.splice(indxImovel, 1);
           }
+         }
+      );
+     }
+  }
+  removerImovelVendido(imovelARemover: Imovel): void {
+    if (imovelARemover.id){
+      this.ImovelService.apagar(imovelARemover.id).subscribe(
+        removido => {
+          console.log(removido);
+          const indxImovel = this.imovelVendidos.findIndex(u => u.id === imovelARemover.id);
 
+          if (indxImovel > -1) {
+            this.imovelVendidos.splice(indxImovel, 1);
+          }
         }
       );
+    }
   }
-  atualizarVenda(ImovelAVender: Imovel): void {
-    ImovelAVender.status = 'vendido';
-    this.ImovelService.atualizar(ImovelAVender).subscribe(
+  atualizarVenda(imovelAVender: Imovel): void {
+    imovelAVender.status = 'vendido';
+    this.ImovelService.atualizar(imovelAVender).subscribe(
       vendido => {
         console.log(vendido);
-        const indxImovel = this.Imovel.findIndex(u => u.id === ImovelAVender.id);
-
+        const indxImovel = this.imovelAVenda.findIndex(u => u.id === imovelAVender.id);
         if (indxImovel > -1){
-          this.ImovelAVenda.splice(indxImovel, 1);
-          this.ImovelVendidos.push(ImovelAVender);
+          this.imovelAVenda.splice(indxImovel, 1);
+          this.imovelVendidos.push(imovelAVender);
         }
       }
     );

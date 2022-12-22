@@ -4,6 +4,8 @@ import {Imovel} from '../../shared/modelo/imovel';
 import {ActivatedRoute} from '@angular/router';
 import {ImovelService} from '../../shared/servicos/imovel.service';
 import {ImovelFirestoreService} from "../../shared/servicos/imovel-firestore.service";
+import {MensagemService} from "../../shared/servicos/mensagem.service";
+import {IMensagem} from "../../shared/servicos/IMensagem";
 
 @Component({
   selector: 'app-cadastro-imovel',
@@ -12,20 +14,20 @@ import {ImovelFirestoreService} from "../../shared/servicos/imovel-firestore.ser
 })
 export class CadastroImovelComponent implements OnInit {
 
-  ImovelAtual: Imovel;
+  imovelAtual: Imovel;
 
   inserindo = true;
   nomeBotao = 'Inserir';
 
-  constructor(private rotaAtual: ActivatedRoute, private ImovelService: ImovelService) {
-    this.ImovelAtual = new Imovel();
+  constructor(private rotaAtual: ActivatedRoute, private ImovelService: ImovelService, private MensagemService: MensagemService) {
+    this.imovelAtual = new Imovel();
     if (rotaAtual.snapshot.paramMap.has('id')) {
       const idParaEdicao = rotaAtual.snapshot.paramMap.get('id');
       if (idParaEdicao) {
         this.inserindo = false;
         this.nomeBotao = 'Atualizar';
         const ImovelEncontrado = this.ImovelService.pesquisarPorId(idParaEdicao).subscribe(
-          ImovelEncontrado => this.ImovelAtual = ImovelEncontrado
+          ImovelEncontrado => this.imovelAtual = ImovelEncontrado
         )
       }
     }
@@ -36,18 +38,20 @@ export class CadastroImovelComponent implements OnInit {
 
   inserirOuAtualizarImovel() {
     if (this.inserindo) {
-      this.ImovelService.inserir(this.ImovelAtual).subscribe(
-        ImovelInserido => console.log(ImovelInserido)
+      this.ImovelService.inserir(this.imovelAtual).subscribe(
+        ImovelInserido => this.MensagemService.imovelcadastrado('Imovel cadastrado com sucesso')
       );
-      this.ImovelAtual = new Imovel();
+      this.imovelAtual = new Imovel();
     } else {
-      this.ImovelService.atualizar(this.ImovelAtual).subscribe(
-        ImovelAtualizado => console.log(ImovelAtualizado)
+      this.ImovelService.atualizar(this.imovelAtual).subscribe(
+        ImovelAtualizado => console.log(ImovelAtualizado),
+             imovelAtualizado => this.MensagemService.imovelatualizado('Imovel atualizado com sucesso')
       )
     }
+
   }
 
   atualizaNumero(novoNumero: number) {
-    this.ImovelAtual.numero = novoNumero;
+    this.imovelAtual.numero = novoNumero;
   }
 }
