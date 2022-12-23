@@ -44,7 +44,6 @@ export class CadastroImovelComponent implements OnInit {
       this.imovelAtual = new Imovel();
     } else {
       this.ImovelService.atualizar(this.imovelAtual).subscribe(
-        ImovelAtualizado => console.log(ImovelAtualizado),
              imovelAtualizado => this.MensagemService.imovelatualizado('Imovel atualizado com sucesso')
       )
     }
